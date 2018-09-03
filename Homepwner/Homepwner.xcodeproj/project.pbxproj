@@ -10,6 +10,8 @@
 		5637639A213D3C63000D7EFB /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56376399213D3C63000D7EFB /* Launch Screen.storyboard */; };
 		563763A0213D3DFA000D7EFB /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5637639F213D3DFA000D7EFB /* BNRItem.m */; };
 		563763A3213D3EE7000D7EFB /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 563763A2213D3EE7000D7EFB /* BNRItemStore.m */; };
+		5674805B213D61290039EA79 /* BNRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56748059213D61290039EA79 /* BNRDetailViewController.m */; };
+		5674805C213D61290039EA79 /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5674805A213D61290039EA79 /* BNRDetailViewController.xib */; };
 		56CDD841213D3A6A00FE4803 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 56CDD840213D3A6A00FE4803 /* main.m */; };
 		56CDD844213D3A6A00FE4803 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 56CDD843213D3A6A00FE4803 /* AppDelegate.m */; };
 		56CDD84C213D3A6A00FE4803 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56CDD84B213D3A6A00FE4803 /* Assets.xcassets */; };
@@ -23,6 +25,9 @@
 		5637639F213D3DFA000D7EFB /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
 		563763A1213D3EE7000D7EFB /* BNRItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemStore.h; sourceTree = "<group>"; };
 		563763A2213D3EE7000D7EFB /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
+		56748058213D61290039EA79 /* BNRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDetailViewController.h; sourceTree = "<group>"; };
+		56748059213D61290039EA79 /* BNRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDetailViewController.m; sourceTree = "<group>"; };
+		5674805A213D61290039EA79 /* BNRDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BNRDetailViewController.xib; sourceTree = "<group>"; };
 		56CDD83C213D3A6A00FE4803 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56CDD840213D3A6A00FE4803 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		56CDD842213D3A6A00FE4803 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -66,6 +71,9 @@
 			children = (
 				56CDD842213D3A6A00FE4803 /* AppDelegate.h */,
 				56CDD843213D3A6A00FE4803 /* AppDelegate.m */,
+				56748058213D61290039EA79 /* BNRDetailViewController.h */,
+				56748059213D61290039EA79 /* BNRDetailViewController.m */,
+				5674805A213D61290039EA79 /* BNRDetailViewController.xib */,
 				56FF04B2213D44120017B572 /* BNRItemsViewController.h */,
 				56FF04B3213D44120017B572 /* BNRItemsViewController.m */,
 				56FF04B5213D50730017B572 /* HeaderView.xib */,
@@ -148,6 +156,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5674805C213D61290039EA79 /* BNRDetailViewController.xib in Resources */,
 				56FF04B6213D50730017B572 /* HeaderView.xib in Resources */,
 				5637639A213D3C63000D7EFB /* Launch Screen.storyboard in Resources */,
 				56CDD84C213D3A6A00FE4803 /* Assets.xcassets in Resources */,
@@ -161,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5674805B213D61290039EA79 /* BNRDetailViewController.m in Sources */,
 				563763A3213D3EE7000D7EFB /* BNRItemStore.m in Sources */,
 				563763A0213D3DFA000D7EFB /* BNRItem.m in Sources */,
 				56CDD844213D3A6A00FE4803 /* AppDelegate.m in Sources */,

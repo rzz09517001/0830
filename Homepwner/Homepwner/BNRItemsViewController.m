@@ -12,7 +12,7 @@
 
 @interface BNRItemsViewController()
 
-@property (nonatomic, strong) IBOutlet UIView *headerView;
+//@property (nonatomic, strong) IBOutlet UIView *headerView;
 
 @end
 
@@ -22,20 +22,34 @@
 {
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
-    UIView *header = self.headerView;
-    [self.tableView setTableHeaderView:header];
+//    UIView *header = self.headerView;
+//    [self.tableView setTableHeaderView:header];
 }
 
--(UIView *)headerView
+-(void)viewWillAppear:(BOOL)animated
 {
-    if (!_headerView) {
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil];
-    }
-    return _headerView;
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
+
+//-(UIView *)headerView
+//{
+//    if (!_headerView) {
+//        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil];
+//    }
+//    return _headerView;
+//}
 -(instancetype)init
 {
     self = [super initWithStyle:UITableViewStylePlain];
+    if (self) {
+        UINavigationItem *item = self.navigationItem;
+        item.title = @"Hompwner";
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
+        item.rightBarButtonItem = bbi;
+        item.leftBarButtonItem = self.editButtonItem;
+        
+    }
     return self;
 }
 
@@ -54,20 +68,20 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
--(IBAction)toggleEditingMode:(id)sender
-{
-    if (self.isEditing) {
-        //修改按钮文字，提示用户当前的表格状态
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
-        // 关闭编辑模式
-        [self setEditing:NO animated:YES];
-    } else {
-        //修改按钮文字，提示用户当前的表格状态
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
-        //开启编辑模式
-        [self setEditing:YES animated:YES];
-    }
-}
+//-(IBAction)toggleEditingMode:(id)sender
+//{
+//    if (self.isEditing) {
+//        //修改按钮文字，提示用户当前的表格状态
+//        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+//        // 关闭编辑模式
+//        [self setEditing:NO animated:YES];
+//    } else {
+//        //修改按钮文字，提示用户当前的表格状态
+//        [sender setTitle:@"Done" forState:UIControlStateNormal];
+//        //开启编辑模式
+//        [self setEditing:YES animated:YES];
+//    }
+//}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -102,5 +116,14 @@
 -(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return @"Remove";
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] init];
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    BNRItem *item = items[indexPath.row];
+    detailViewController.item = item;
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 @end
