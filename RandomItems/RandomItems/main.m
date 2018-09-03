@@ -14,25 +14,38 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         //创建1个NSMutableArray对象，并用items变量保存该对象的地址
         NSMutableArray *items = [[NSMutableArray alloc] init];
-        BNRContainer *container = [[BNRContainer alloc] init];
-        container.serialNumber = @"2A";
-        container.valueInDollars = 25;
+//        BNRContainer *container = [[BNRContainer alloc] init];
+//        container.serialNumber = @"2A";
+//        container.valueInDollars = 25;
         
         //[items addObject:@"One"];
         //[items addObject:@"Two"];
         //[items addObject:@"Three"];
         //[items insertObject:@"Zero" atIndex:0];
         
-        for (int i=0; i<10; i++) {
-            BNRItem *item = [BNRItem randomItem];
-            [items addObject:item];
-            [container setSubItems:item];
+        //for (int i=0; i<10; i++) {
+            //BNRItem *item = [BNRItem randomItem];
+            //[items addObject:item];
+            //[container setSubItems:item];
+        //}
+        
+        BNRItem *backpack = [[BNRItem alloc] initWithItemName:@"Backpack"];
+        [items addObject:backpack];
+        BNRItem *calculator = [[BNRItem alloc] initWithItemName:@"Calculator"];
+        [items addObject:calculator];
+        
+        backpack.containedItem = calculator;;
+        backpack = nil;
+        calculator = nil;
+        
+        for (BNRItem *item in items) {
+            NSLog(@"%@", item);
         }
         
         //异常
         //id lastObj = [items lastObject];
         //[lastObj count];
-        NSLog(@"%@", container);
+        //NSLog(@"%@", container);
         
         //for (BNRItem *item in items) {
         //    NSLog(@"%@", item);
@@ -53,6 +66,7 @@ int main(int argc, const char * argv[]) {
         //NSLog(@"%@",itemWithName);
         //BNRItem *itemWithNoName = [[BNRItem alloc] init];
         //NSLog(@"%@",itemWithNoName);
+        NSLog(@"即将要释放内存！---------------");
         //释放items所指向的NSMutableArray对象
         items = nil;
     }

@@ -24,15 +24,15 @@
 
 -(NSString *)description
 {
-    int sum = _valueInDollars;
+    int sum = self.valueInDollars;
     for (int i = 0; i < [subItems count]; i++) {
         sum = sum + subItems[i].valueInDollars;
     }
     NSString *des = [[NSString alloc] initWithFormat:@"名称%@(数字%@),总价值%d,记录与%@,数组内容包括%@",
-                     _itemName,
-                     _serialNumber,
+                     self.itemName,
+                     self.serialNumber,
                      sum,
-                     _dateCreated,
+                     self.dateCreated,
                      subItems];
     return des;
 }
