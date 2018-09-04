@@ -83,6 +83,7 @@
 //    }
 //}
 
+#pragma mark - TableView data source
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [[[BNRItemStore sharedStore] allItems] count];
@@ -113,6 +114,7 @@
     [[BNRItemStore sharedStore] mobveItemAtIndex:sourceIndexPath.row    toIndex:destinationIndexPath.row];
 }
 
+#pragma mark - TableView delegate
 -(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return @"Remove";
