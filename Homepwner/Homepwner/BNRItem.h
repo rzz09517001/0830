@@ -23,6 +23,7 @@
 @property(nonatomic, copy) NSString *serialNumber;
 @property(nonatomic) int valueInDollars;
 @property(nonatomic, readonly, strong) NSDate *dateCreated;
+@property(nonatomic, copy) NSString *itemKey;
 
 +(instancetype)randomItem;
 //BNRItem类的指定初始化方法
