@@ -62,7 +62,9 @@
 {
     NSLog(@"Recognized Double Tap");
     [self.linesInProgress removeAllObjects];
+    
     [self.finishedLines removeAllObjects];
+    //self.finishedLines = [[NSMutableArray alloc] init];
     [self setNeedsDisplay];
 }
 
@@ -153,6 +155,13 @@
         [[UIColor greenColor] set];
         [self strokeLine:self.selectedLine];
     }
+    //测试应用运行时占用CPU性能
+//    float f = 0.0;
+//    for (int i=0; i<1000000; i++) {
+//        f = f + sin(sin(sin(time(NULL)+ i)));
+//    }
+//    NSLog(@"f=%f",f);
+    
 }
 
 -(BNRLine *)lineAtPoint:(CGPoint)p
@@ -177,6 +186,18 @@
     [self.finishedLines removeObject:self.selectedLine];
     [self setNeedsDisplay];
 }
+
+/**
+ 静态分析测试
+ */
+//-(int)numberOfLines
+//{
+//    int count = 0;
+//    //计数前先查看相应的指针是否为nil
+//    if (self.linesInProgress && self.finishedLines)
+//    count = [self.linesInProgress count] + [self.finishedLines count];
+//    return count;
+//}
 
 #pragma mark - toucheEvent
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -223,6 +244,8 @@
         BNRLine *line = self.linesInProgress[key];
         [self.finishedLines addObject:line];
         [self.linesInProgress removeObjectForKey:key];
+        //测试强引用
+        //line.containingArray = self.finishedLines;
     }
 //    [self.finishedLines addObject:self.currentLine];
 //    self.currentLine = nil;

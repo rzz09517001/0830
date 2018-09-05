@@ -20,9 +20,13 @@
 +(instancetype)sharedStore
 {
     static BNRItemStore *sharedStore = nil;
-    if (!sharedStore) {
+//    if (!sharedStore) {
+//        sharedStore = [[self alloc] initPrivate];
+//    }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         sharedStore = [[self alloc] initPrivate];
-    }
+    });
     return sharedStore;
 }
 
@@ -36,7 +40,13 @@
 {
     self = [super init];
     if (self) {
-        _privateItems = [[NSMutableArray alloc] init];
+        //_privateItems = [[NSMutableArray alloc] init];
+        NSString *path = [self itemArchivePath];
+        _privateItems = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        //如果之前没保存过就创建个新的
+        if (!_privateItems) {
+            _privateItems = [[NSMutableArray alloc] init];
+        }
     }
     return self;
 }
@@ -48,7 +58,8 @@
 
 -(BNRItem *)createItem
 {
-    BNRItem *item = [BNRItem randomItem];
+    //BNRItem *item = [BNRItem randomItem];
+    BNRItem *item = [[BNRItem alloc] init];
     [self.privateItems addObject:item];
     
     return item;
@@ -69,6 +80,23 @@
     BNRItem *item = self.privateItems[fromIndex];
     [self.privateItems removeObject:item];
     [self.privateItems insertObject:item atIndex:toIndex];
+}
+
+/**
+ 获取路径
+ */
+-(NSString *)itemArchivePath
+{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //从documentDirectories数组获取第一个，也是唯一一个路径
+    NSString *documentDirectory = [documentDirectories firstObject];
+    return [documentDirectory stringByAppendingString:@"items.archive"];
+}
+
+-(BOOL)saveChanges
+{
+    NSString *path = [self itemArchivePath];
+    return [NSKeyedArchiver archiveRootObject:self.privateItems toFile:path];
 }
 
 @end

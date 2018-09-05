@@ -13,5 +13,7 @@
 
 @property(nonatomic) CGPoint begin;
 @property(nonatomic) CGPoint end;
+//测试强引用
+//@property(nonatomic,weak) NSMutableArray *containingArray;
 
 @end
