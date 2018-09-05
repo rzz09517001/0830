@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak ,nonatomic) IBOutlet UILabel *serialLabel;
+@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) UIPopoverController *imagePickerPopover;
 
 
@@ -42,10 +45,17 @@
             UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
             self.navigationItem.leftBarButtonItem = cancelItem;
         }
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self selector:@selector(updateFonts) name:UIContentSizeCategoryDidChangeNotification object:nil];
     }
     return self;
 }
 
+-(void)dealloc
+{
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter removeObserver:self];
+}
 -(void)save:(id)sender
 {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dissmissBlock];
@@ -104,6 +114,7 @@
     NSString *itemKey = item.itemKey;
     UIImage *imageToDisplay = [[BNRImageStore sharedStore] imageForKey:itemKey];
     self.imageView.image = imageToDisplay;
+    [self updateFonts];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -115,6 +126,18 @@
     item.itemName = self.name.text;
     item.serialNumber = self.serial.text;
     item.valueInDollars = [self.value.text intValue];
+}
+
+-(void)updateFonts
+{
+    UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    self.nameLabel.font = font;
+    self.serialLabel.font = font;
+    self.valueLabel.font = font;
+    self.date.font = font;
+    self.name.font = font;
+    self.serial.font = font;
+    self.value.font = font;
 }
 
 #pragma mark Interface
@@ -185,6 +208,8 @@
 {
     //通过info字典获取选择的照片
     UIImage *image = info[UIImagePickerControllerOriginalImage];
+    //创建缩略图
+    [self.item setThumbnailFromImage:image];
     //将照片放入UIImageView对象
     [[BNRImageStore sharedStore] setImage:image forkey:self.item.itemKey];
     self.imageView.image = image;
